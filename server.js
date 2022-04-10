@@ -1,9 +1,13 @@
 const express = require("express");
 const connectDB = require("./src/config/db");
+connectDB();
 
 const app = express();
 
-connectDB();
+app.use(express.json());
+
+// routes
+app.use("/api/items", require("./src/routes/items.routes"));
 
 const port = process.env.PORT || 8000;
 
