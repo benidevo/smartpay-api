@@ -11,4 +11,6 @@ router.patch("/:id", ItemsController.update);
 
 router.delete("/:id", ItemsController.delete);
 
+router.get("/category/:name", ItemsController.showByCategory);
+
 module.exports = router;
