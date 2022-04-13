@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const User = require("../../models/User");
 
-const createItem = async (req, res) => {
+const createUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
@@ -17,10 +17,16 @@ const createItem = async (req, res) => {
     res.status(201).json({
       success: true,
       message: "Registration successful",
-      user: newUser
+      user: newUser,
     });
   } catch (error) {
-    console.error(error);
+    if (error.code === 11000) {
+      return res.status(400).json({
+        success: false,
+        message: "User already exists",
+      });
+    }
+    // console.error(error);
     res.status(500).json({
       success: false,
       message: "Internal Server Error",
@@ -29,4 +35,4 @@ const createItem = async (req, res) => {
   }
 };
 
-module.exports = createItem;
+module.exports = createUser;
