@@ -1,9 +1,12 @@
 const express = require("express");
 const connectDB = require("./src/config/db");
+const cors = require("cors");
+const helmet = require("helmet");
 const { appLogger } = require("./src/utils/logger");
 
 const app = express();
-
+app.use(cors());
+app.use(helmet());
 app.use(express.json());
 
 // routes
