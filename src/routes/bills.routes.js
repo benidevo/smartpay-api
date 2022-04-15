@@ -6,4 +6,6 @@ const router = express.Router();
 
 router.post("/", auth, BillsController.create);
 
+router.get("/", auth, BillsController.list);
+
 module.exports = router;
