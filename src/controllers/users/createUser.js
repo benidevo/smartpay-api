@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const User = require("../../models/User");
+const AppError = require("../../utils/appError");
 
 const { usersLogger } = require("../../utils/logger");
 
@@ -15,24 +16,17 @@ const createUser = async (req, res) => {
       password: hashedPassword,
     });
     await newUser.save();
+    usersLogger.info(`User ${name} created, {action: user registration}`);
     res.status(201).json({
       success: true,
       message: "Registration successful",
-      user: newUser,
     });
   } catch (error) {
     usersLogger.info(`${error.message}, {action: "user registration }`);
     if (error.code === 11000) {
-      return res.status(400).json({
-        success: false,
-        message: "User already exists",
-      });
+      throw new AppError("User with this email already exists");
     }
-    res.status(500).json({
-      success: false,
-      message: "Internal Server Error",
-      items: null,
-    });
+    throw new AppError("Internal server error", 500);
   }
 };
 
