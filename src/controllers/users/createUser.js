@@ -1,6 +1,8 @@
 const bcrypt = require("bcrypt");
 const User = require("../../models/User");
 
+const { usersLogger } = require("../../utils/logger");
+
 const createUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -12,7 +14,6 @@ const createUser = async (req, res) => {
       email,
       password: hashedPassword,
     });
-    // console.log(newUser);
     await newUser.save();
     res.status(201).json({
       success: true,
@@ -20,13 +21,13 @@ const createUser = async (req, res) => {
       user: newUser,
     });
   } catch (error) {
+    usersLogger.info(`${error.message}, {action: "user registration }`);
     if (error.code === 11000) {
       return res.status(400).json({
         success: false,
         message: "User already exists",
       });
     }
-    // console.error(error);
     res.status(500).json({
       success: false,
       message: "Internal Server Error",

@@ -1,9 +1,10 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
+const { usersLogger } = require("../utils/logger");
+
 const auth = async (req, res, next) => {
   let token = req.headers["authorization"];
-  console.log(token);
   if (!token) {
     return res.status(401).send({
       errors: [
@@ -21,6 +22,7 @@ const auth = async (req, res, next) => {
     req.user = user.id;
     next();
   } catch (error) {
+    usersLogger.error(`${error.message}, {action: "authenticate user"}`);
     res.status(401).json({ errors: [{ msg: "invalid token" }] });
   }
 };

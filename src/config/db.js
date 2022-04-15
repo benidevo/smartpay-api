@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
 
+const { appLogger } = require("../utils/logger");
+
 const DB = process.env.MONGO_URI;
 
 const connectDB = async () => {
@@ -9,9 +11,9 @@ const connectDB = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log("Connected to MongoDB");
+    appLogger.info("Connected to MongoDB");
   } catch (error) {
-    console.log(error.message);
+    appLogger.error(error.message);
     process.exit(1);
   }
 };

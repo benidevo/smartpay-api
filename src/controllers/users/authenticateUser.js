@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../../models/User");
 require("dotenv").config();
+const { usersLogger } = require("../../utils/logger");
 
 const authenticateUser = async (req, res) => {
   try {
@@ -31,13 +32,14 @@ const authenticateUser = async (req, res) => {
     } catch (error) {
       return res.status(500).json({ msg: "Internal server error" });
     }
+    usersLogger.info(`${user.id}, {action: "user login"}`);
     res.status(200).json({
       success: true,
       message: "Login successful",
       accessToken: token,
     });
   } catch (error) {
-    console.error(error);
+    usersLogger.error(`${error.message}, {action: "user login"}`);
     res.status(500).json({
       success: false,
       message: "Internal Server Error",
