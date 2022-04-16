@@ -1,13 +1,13 @@
-const { getAllItems } = require("./getAllItems");
-const createItem = require("./createItem");
-const updateItem = require("./updateItem");
-const deleteItem = require("./deleteItem");
+const { getAllProducts } = require("./getAllItems");
+const createProduct = require("./createItem");
+const updateProduct = require("./updateItem");
+const deleteProduct = require("./deleteItem");
 const showByCategory = require("./showByCategory");
 
 module.exports = {
-  showAll: getAllItems,
-  create: createItem,
-  update: updateItem,
-  delete: deleteItem,
+  showAll: getAllProducts,
+  create: createProduct,
+  update: updateProduct,
+  delete: deleteProduct,
   showByCategory: showByCategory,
 };

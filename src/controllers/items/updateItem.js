@@ -1,31 +1,26 @@
 const Item = require("../../models/Items");
+const AppError = require("../../utils/appError");
+const { productsLogger } = require("../../utils/logger");
 
-const updateItem = async (req, res) => {
+const updateProduct = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const { name, description, price, imageUrl } = req.body;
-
     const item = await Item.findByIdAndUpdate(id, {
-      name,
-      description,
-      price,
-      imageUrl,
+      ...req.body,
     });
-
+    productsLogger.info(
+      `product ${item._id} ${item.name} updated {action: "update product"}`
+    );
     res.json({
       success: true,
       message: "Item updated successfully",
       item,
     });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({
-      success: false,
-      message: "Internal Server Error",
-      item: null,
-    });
+    productsLogger.error(`${err.message}, {action: "update product"}`);
+    throw new AppError("Internal server error", 500);
   }
 };
 
-module.exports = updateItem;
+module.exports = updateProduct;

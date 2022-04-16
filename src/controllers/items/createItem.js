@@ -1,21 +1,21 @@
 const Item = require("../../models/Items");
+const { productsLogger } = require("../../utils/logger");
 
-const createItem = async (req, res) => {
+const createProduct = async (req, res) => {
   try {
-    const newItem = new Item(req.body);
-    await newItem.save();
+    const newProduct = new Item(req.body);
+    await newProduct.save();
+    productsLogger.info(
+      `product ${newProduct._id} ${newProduct.name} created {action: "create product"}`
+    );
     res.status(201).json({
       success: true,
-      message: "Item created",
-      item: newItem,
+      message: "product created",
+      item: newProduct,
     });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Internal Server Error",
-      items: null,
-    });
+    throw new AppError("Internal server error", 500);
   }
 };
 
-module.exports = createItem;
+module.exports = createProduct;

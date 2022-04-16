@@ -85,9 +85,28 @@ const validationLogger = winston.createLogger({
   transports: [transports],
 });
 
+const productsLogger = winston.createLogger({
+  level: process.env.LOG_LEVEL || "info",
+  defaultMeta: { service: "Products" },
+  format: combine(
+    json(),
+    colorize({ all: true }),
+    timestamp({
+      format: "YYYY-MM-DD HH:mm:ss",
+    }),
+    align(),
+    printf(
+      (info) =>
+        `${[info.timestamp]} ${info.level}: ${info.service} ${info.message}`
+    )
+  ),
+  transports: [transports],
+});
+
 module.exports = {
   appLogger,
   usersLogger,
   billsLogger,
   validationLogger,
+  productsLogger,
 };

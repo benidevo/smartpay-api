@@ -1,24 +1,21 @@
 const Item = require("../../models/Items");
+const AppError = require("../../utils/appError");
+const { productsLogger } = require("../../utils/logger");
 
-const deleteItem = async (req, res) => {
+const deleteProduct = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const item = await Item.findByIdAndDelete(id);
-
+    await Item.findByIdAndDelete(id);
     res.json({
       success: true,
       message: "Item deleted successfully",
       item,
     });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({
-      success: false,
-      message: "Internal Server Error",
-      item: null,
-    });
+    productsLogger.error(`${err.message}, {action: "delete product"}`);
+    throw new AppError("Internal server error", 500);
   }
 };
 
-module.exports = deleteItem;
+module.exports = deleteProduct;

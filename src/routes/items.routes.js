@@ -1,17 +1,26 @@
 const express = require("express");
 const ItemsController = require("../controllers/items");
-const { createBillValidator } = require("../middlewares/validators/bills");
+const {
+  createProductValidator,
+  updateProductValidator,
+  filterProductValidator,
+} = require("../middlewares/validators/products");
+const auth = require("../middlewares/auth");
 
 const router = express.Router();
 
-router.get("/", ItemsController.showAll);
+router.get("/", auth, ItemsController.showAll);
 
-router.post("/", ItemsController.create);
+router.post("/", [auth, createProductValidator], ItemsController.create);
 
-router.patch("/:id", ItemsController.update);
+router.patch("/:id", [auth, updateProductValidator], ItemsController.update);
 
-router.delete("/:id", ItemsController.delete);
+router.delete("/:id", auth, ItemsController.delete);
 
-router.get("/category/:name", ItemsController.showByCategory);
+router.get(
+  "/category/:name",
+  [auth, filterProductValidator],
+  ItemsController.showByCategory
+);
 
 module.exports = router;
