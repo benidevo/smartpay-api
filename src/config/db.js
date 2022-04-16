@@ -1,9 +1,17 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
+const config = require("./index");
 
 const { appLogger } = require("../utils/logger");
 
-const DB = process.env.MONGO_URI;
+let DB;
+if (process.env.NODE_ENV === "TEST") {
+  DB = config.test.mongoURI;
+} else if (process.env.NODE_ENV === "DEV") {
+  DB = config.development.mongoURI;
+} else {
+  DB = config.production.mongoURI;
+}
 
 const connectDB = async () => {
   try {

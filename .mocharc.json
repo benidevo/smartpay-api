@@ -1,0 +1,12 @@
+{
+  "spec": "src/controllers/**/*.spec.js",
+  "extension": ["js"],
+  "inline-diffs ": true,
+  "full-trace": true,
+  "recursive": true,
+  "diff": true,
+  "exit": true,
+  "slow": 300,
+  "timeout": 1000000,
+  "ignore": ["node_modules", ".vscode"]
+}

@@ -23,5 +23,9 @@ app.use(errorHandler);
 
 const port = process.env.PORT || 8000;
 
-connectDB();
-app.listen(port, () => appLogger.info(`Server started on port ${port}`));
+app.listen(port, async () => {
+  await connectDB();
+  appLogger.info(`Server started on port ${port}`);
+});
+
+module.exports = app;
