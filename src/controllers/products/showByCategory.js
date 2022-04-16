@@ -1,4 +1,4 @@
-const Item = require("../../models/Items");
+const Item = require("../../models/Product");
 
 const showByCategory = async (req, res) => {
   const { name } = req.params;
@@ -6,7 +6,7 @@ const showByCategory = async (req, res) => {
     const items = await Item.find({ category: name });
     res.json({
       success: true,
-      message: "Items retrieved successfully",
+      message: "products retrieved successfully",
       items,
     });
   } catch (err) {

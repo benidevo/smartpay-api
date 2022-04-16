@@ -1,4 +1,4 @@
-const Item = require("../../models/Items");
+const Item = require("../../models/Product");
 const AppError = require("../../utils/appError");
 const { productsLogger } = require("../../utils/logger");
 

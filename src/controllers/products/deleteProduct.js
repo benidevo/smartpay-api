@@ -1,4 +1,4 @@
-const Item = require("../../models/Items");
+const Product = require("../../models/Product");
 const AppError = require("../../utils/appError");
 const { productsLogger } = require("../../utils/logger");
 
@@ -6,11 +6,10 @@ const deleteProduct = async (req, res) => {
   const { id } = req.params;
 
   try {
-    await Item.findByIdAndDelete(id);
+    await Product.findByIdAndDelete(id);
     res.json({
       success: true,
-      message: "Item deleted successfully",
-      item,
+      message: "product deleted",
     });
   } catch (err) {
     productsLogger.error(`${err.message}, {action: "delete product"}`);

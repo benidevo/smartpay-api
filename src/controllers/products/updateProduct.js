@@ -1,4 +1,4 @@
-const Item = require("../../models/Items");
+const Product = require("../../models/Product");
 const AppError = require("../../utils/appError");
 const { productsLogger } = require("../../utils/logger");
 
@@ -6,16 +6,26 @@ const updateProduct = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const item = await Item.findByIdAndUpdate(id, {
-      ...req.body,
-    });
+    const product = await Product.findByIdAndUpdate(
+      id,
+      {
+        ...req.body,
+      },
+      {
+        new: true,
+      }
+    );
+
+    if (!product) {
+      return new AppError("Product not found", 404);
+    }
     productsLogger.info(
-      `product ${item._id} ${item.name} updated {action: "update product"}`
+      `product ${product._id} ${product.name} updated {action: "update product"}`
     );
     res.json({
       success: true,
-      message: "Item updated successfully",
-      item,
+      message: "Product updated successfully",
+      product,
     });
   } catch (err) {
     productsLogger.error(`${err.message}, {action: "update product"}`);
