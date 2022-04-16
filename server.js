@@ -16,7 +16,7 @@ if (process.env.NODE_ENV === "PROD") {
   app.use(rateLimiter);
 }
 // routes
-app.use("/api/items", require("./src/routes/items.routes"));
+app.use("/api/products", require("./src/routes/products.routes"));
 app.use("/api/auth", require("./src/routes/users.routes"));
 app.use("/api/bills", require("./src/routes/bills.routes"));
 app.use(errorHandler);

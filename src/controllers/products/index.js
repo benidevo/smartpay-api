@@ -1,7 +1,7 @@
-const { getAllProducts } = require("./getAllItems");
-const createProduct = require("./createItem");
-const updateProduct = require("./updateItem");
-const deleteProduct = require("./deleteItem");
+const { getAllProducts } = require("./getAllProducts");
+const createProduct = require("./createProduct");
+const updateProduct = require("./updateProduct");
+const deleteProduct = require("./deleteProduct");
 const showByCategory = require("./showByCategory");
 
 module.exports = {
