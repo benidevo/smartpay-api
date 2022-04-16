@@ -1,0 +1,1 @@
+exports.createBillValidator = require("./createBill");

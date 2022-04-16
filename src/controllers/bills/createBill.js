@@ -1,4 +1,5 @@
 const Bill = require("../../models/Bill");
+const AppError = require("../../utils/appError");
 
 const { billsLogger } = require("../../utils/logger");
 
@@ -9,7 +10,9 @@ module.exports = async (req, res) => {
       salesPerson: req.user,
     });
     await bill.save();
-    billsLogger.info(`${bill.id}, {action: "charge bill"}`);
+    billsLogger.info(
+      `Bill ${bill._id} created for ${bill.customerName}, {action: charge bill}`
+    );
     res.json({
       success: true,
       message: "Bill charged successfully",
@@ -17,9 +20,6 @@ module.exports = async (req, res) => {
     });
   } catch (error) {
     billsLogger.error(`${error.message}, {action: "charge bill"}`);
-    res.status(500).json({
-      success: false,
-      message: "Internal server error",
-    });
+    throw new AppError("Internal server error", 500);
   }
 };

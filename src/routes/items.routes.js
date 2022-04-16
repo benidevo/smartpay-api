@@ -1,5 +1,6 @@
 const express = require("express");
 const ItemsController = require("../controllers/items");
+const { createBillValidator } = require("../middlewares/validators/bills");
 
 const router = express.Router();
 

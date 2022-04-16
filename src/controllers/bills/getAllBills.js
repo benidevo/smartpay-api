@@ -1,4 +1,5 @@
 const Bill = require("../../models/Bill");
+const AppError = require("../../utils/appError");
 
 const { billsLogger } = require("../../utils/logger");
 
@@ -13,9 +14,6 @@ module.exports = async (req, res) => {
     });
   } catch (error) {
     billsLogger.error(`${error.message}, {action: "retrieve all bills"}`);
-    res.status(500).json({
-      success: false,
-      message: "Internal server error",
-    });
+    throw new AppError("Internal server error", 500);
   }
 };
