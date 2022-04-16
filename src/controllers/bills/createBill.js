@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
     billsLogger.info(
       `Bill ${bill._id} created for ${bill.customerName}, {action: charge bill}`
     );
-    res.json({
+    res.status(201).json({
       success: true,
       message: "Bill charged successfully",
       bill,

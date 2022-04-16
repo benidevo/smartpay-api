@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
 
     res.json({
       success: true,
-      message: "Bill charged successfully",
+      message: "Bills retrieved successfully",
       bills,
     });
   } catch (error) {
