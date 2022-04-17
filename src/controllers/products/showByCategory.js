@@ -1,21 +1,18 @@
-const Item = require("../../models/Product");
+const Product = require("../../models/Product");
+const AppError = require("../../utils/appError");
 
 const showByCategory = async (req, res) => {
   const { name } = req.params;
   try {
-    const items = await Item.find({ category: name });
+    const products = await Product.find({ category: name });
     res.json({
       success: true,
       message: "products retrieved successfully",
-      items,
+      products,
     });
   } catch (err) {
     console.error(err);
-    res.status(500).json({
-      success: false,
-      message: "Internal Server Error",
-      items: null,
-    });
+    throw new AppError("Internal server error", 500);
   }
 };
 

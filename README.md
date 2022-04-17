@@ -2,7 +2,7 @@
 
 ## Description
 
-SmartPay API is a RESTful API for SmartPay. SmartPay is a point of sale application that allows you to accept payments from your customers and record transaction details.
+This is a RESTful API for SmartPay. SmartPay is a point of sale application that allows you to accept payments from your customers and record transaction details.
 
 ## Technologies
 
