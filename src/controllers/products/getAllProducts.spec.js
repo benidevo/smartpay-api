@@ -67,16 +67,20 @@ describe("Test RETRIEVE ALL PRODUCTS route. GET /api/products", () => {
         res.body.should.have
           .property("message")
           .eql("products retrieved successfully");
-        res.body.should.have.property("items");
-        res.body.items.should.be.a("array");
-        res.body.items.length.should.be.eql(1);
-        res.body.items[0].should.have.property("_id").eql(productId);
-        res.body.items[0].should.have.property("name").eql(productData.name);
-        res.body.items[0].should.have.property("price").eql(productData.price);
-        res.body.items[0].should.have
+        res.body.should.have.property("products");
+        res.body.products.should.be.a("array");
+        res.body.products.length.should.be.eql(1);
+        res.body.products[0].should.have.property("_id").eql(productId);
+        res.body.products[0].should.have.property("name").eql(productData.name);
+        res.body.products[0].should.have
+          .property("price")
+          .eql(productData.price);
+        res.body.products[0].should.have
           .property("category")
           .eql(productData.category);
-        res.body.items[0].should.have.property("image").eql(productData.image);
+        res.body.products[0].should.have
+          .property("image")
+          .eql(productData.image);
         done();
       });
   });

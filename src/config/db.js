@@ -14,6 +14,8 @@ if (process.env.NODE_ENV === "TEST") {
 }
 
 const connectDB = async () => {
+  mongoose.set("strictQuery", false);
+
   try {
     await mongoose.connect(DB, {
       useNewUrlParser: true,

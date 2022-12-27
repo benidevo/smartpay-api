@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a RESTful API for SmartPay. SmartPay is a point of sale application that allows you to accept payments from your customers and record transaction details.
+This is a RESTful API for SmartPay. SmartPay is a point of sale application that allows users to accept payments from their customers and record transaction details.
 
 ## Technologies
 
@@ -12,29 +12,29 @@ The following technologies were used in this project:
 - [Node.js](https://nodejs.org/en/)
 - [Express](https://expressjs.com/)
 - [MongoDB](https://www.mongodb.com/)
-- [JSON Web Tokens](https://jwt.io/)
-- [Heroku](https://www.heroku.com/)
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
 
 ## Requirements
 
-Before starting, you need to have [Node.js](https://nodejs.org/en/) installed. Also ensure to create a .env file in the root directory of the project, and provide the environment variables in .env.example file.
+Before starting, you need to create a .env file in the root directory of the project, and provide the environment variables in .env.example file.
 
 Kindly ensure that you are in the root directory before running the following commands.
 
-## Install Dependencies
+## Install Dependencies and Run the Application
 
 ```bash
-npm install
+docker-compose up
 ```
 
 ## Run Tests
 
 ```bash
-npm test
+docker-compose -f docker-compose.test.yml up --build
 ```
 
-## Run Development Server
+## Stop the Application
 
 ```bash
-npm run dev
+docker-compose down
 ```
